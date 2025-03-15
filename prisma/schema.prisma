@@ -1,0 +1,265 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Permission {
+  id                 Int                  @id @default(autoincrement())
+  name               String
+  PermissionsOnRoles PermissionsOnRoles[]
+}
+
+model User {
+  id          String   @id @unique
+  email       String   @unique
+  name        String
+  phoneNumber String
+  gender      Gender
+  verified    Boolean  @default(false)
+  imagePath   String?
+  createdAt   DateTime @default(now())
+  metadata    Json     @default("{}")
+  Project               Project[]
+  Palette               Palette[]
+  notificationTemplates NotificationTemplateUser[]
+  notifications         Notification[]
+  donations             Donation[]
+  subscriptions         Subscription[]
+  payments              Payment[]
+  preferences           UserPreferences?
+  domainRegistrations   DomainRegistration[]
+}
+
+model Palette {
+  id                       String                   @id @default(uuid()) @db.Uuid
+  user                     User?                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId                   String?                  @db.Uuid
+  primary                  String
+  secondary                String
+  neutral                  String
+  titles                   String
+  subTitles                String
+}
+ 
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum IntellectualPropertyType {
+  GENERAL
+  PERSONAL
+  ORGANIZATIONAL
+}
+
+
+enum ProjectType {
+  STATIC
+  DYNAMIC 
+}
+model Project {
+  id                       String                   @id @default(uuid()) @db.Uuid
+  user                     User                     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId                   String
+  name                     String
+  type                     ProjectType
+  purpose                  String
+  description              String
+  keywords                 String[]
+  similarWebsites          String[]
+  websiteLocation          String
+  mainLanguage             String
+  createdAt                DateTime                 @default(now())
+  intellectualPropertyType IntellectualPropertyType
+  intellectualPropertyInfo Json
+  cdnPullZoneId            Int?
+  media              Media[]
+  audience           ProjectAudience?
+  settings           ProjectSettings?
+  pages              Page[]
+  posts              Post[]
+  contactMessages    ContactMessage[]
+  plugins            Plugin[]
+  domainRegistration DomainRegistrationsOnProjects?
+  menus              Menu[]
+  analytics          Analytics?
+  generation         ProjectGeneration?
+}
+
+enum MediaVariation {
+  VIDEO
+  AUDIO
+  IMAGE
+}
+
+model Media {
+  id        Int            @id @default(autoincrement())
+  type      MediaVariation
+  title     String
+  path      String
+  viewTypes String[]
+  projectId String         @db.Uuid
+  project   Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model ProjectAudience {
+  id            Int      @id @default(autoincrement())
+  age           String[]
+  gender        String[]
+  organizations String[]
+  countries     String[]
+  projectId     String   @unique @db.Uuid
+  project       Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model ProjectSettings {
+  id         Int     @id @default(autoincrement())
+  logoType   String
+  logoValue  String
+  palette    Json
+  fontFamily String
+  projectId  String  @unique @db.Uuid
+  project    Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Page {
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String
+  slug        String?
+  projectId   String  @db.Uuid
+  project     Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  components ComponentsPages[]
+  menus      Menu[]
+}
+
+enum ComponentType {
+  HERO 
+  ABOUT 
+  FAQ 
+  BLOGS 
+  VIDEO 
+  CONTACT 
+  FEATURES
+  GALLERY
+  TEAM
+  SUBSCRIPTION
+  TERMS_AND_SERVICES
+  HOW_IT_WORKS
+  SLIDER
+  OUR_CLIENTS
+  OUR_SOLUTION
+  PRIVACY_POLICY
+  FOOTER
+  MESSAGE_WITH_ACTION
+}
+
+model Component {
+  id                 Int                  @id @default(autoincrement())
+  name               String               @unique
+  type               ComponentType
+  image              String
+  ComponentsOnPages  ComponentsPages[]
+}
+
+model ComponentsPages {
+  id          Int       @id @default(autoincrement())
+  component   Component @relation(fields: [componentId], references: [id])
+  componentId Int
+  page        Page      @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  pageId      Int
+  data        Json
+  order       Int
+}
+
+model Post {
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String?
+  description String
+  imagePath   String
+  imageAlt    String?
+  body        String
+  projectId   String   @db.Uuid
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+}
+
+model ContactRequest {
+  id          Int          @id @default(autoincrement())
+  name        String
+  email       String
+  phoneNumber String
+  subject     String
+  description String
+  status      TicketStatus @default(OPEN)
+  assigneeId  String?
+  assignee    Admin?       @relation(fields: [assigneeId], references: [id], onDelete: SetNull)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @default(now())
+}
+
+model ContactMessage {
+  id          Int      @id @default(autoincrement())
+  name        String
+  email       String
+  description String
+  projectId   String   @db.Uuid
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+}
+
+model Menu {
+  id        Int     @id @default(autoincrement())
+  label     String
+  place     String
+  link      String?
+  section      String?
+  parentId  Int?
+  parent    Menu?   @relation("children", fields: [parentId], references: [id], onDelete: Cascade)
+  children  Menu[]  @relation("children")
+  projectId String  @db.Uuid
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  pageId    Int?
+  page      Page?   @relation(fields: [pageId], references: [id], onDelete: Cascade)
+}
+
+model Analytics {
+  id                Int     @id @default(autoincrement())
+  displayName       String
+  measurementId     String
+  propertyName      String
+  parentAccountName String
+  dataStreamName    String
+  defaultUri        String
+  projectId         String  @unique @db.Uuid
+  project           Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+
+model UserPreferences {
+  userId     String @unique
+  user       User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  imageModel String @default("stable-diffusion-XL-1.0")
+  textModel  String @default("Mixtral-8x7b")
+}
+
+model ProjectGeneration {
+  id        Int                     @id @default(autoincrement())
+  projectId String                  @unique @db.Uuid
+  project   Project                 @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  status    ProjectGenerationStatus
+  createdAt DateTime                @default(now())
+  logs  String?
+  error String?
+}
+
+enum ProjectGenerationStatus {
+  RUNNING
+  COMPLETED
+  FAILED
+}
