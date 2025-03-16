@@ -1,0 +1,19 @@
+export enum FooterVariation {
+  FOOTER_ONE = 'FOOTER_ONE',
+  FOOTER_TWO = 'FOOTER_TWO',
+  FOOTER_THREE = 'FOOTER_THREE',
+  FOOTER_FOUR = 'FOOTER_FOUR',
+  FOOTER_FIVE = 'FOOTER_FIVE',
+  FOOTER_SIX = 'FOOTER_SIX',
+  FOOTER_SEVEN = 'FOOTER_SEVEN',
+  FOOTER_EIGHT = 'FOOTER_EIGHT',
+  FOOTER_NINE = 'FOOTER_NINE',
+  FOOTER_TEN = 'FOOTER_TEN',
+  FOOTER_ELEVEN = 'FOOTER_ELEVEN',
+  FOOTER_TWELVE = 'FOOTER_TWELVE',
+  FOOTER_THIRTEEN = 'FOOTER_THIRTEEN',
+  FOOTER_FOURTEEN = 'FOOTER_FOURTEEN',
+}
+export type MenusCongig = { headingColor: string; childrenColor: string };
+
+export type IFooterVariation = `${FooterVariation}`;
