@@ -1,0 +1,1093 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type ActiveUsersMetric {
+  category: String!
+  value: Int!
+}
+
+type ActiveUsersOutput {
+  items: [ActiveUsersMetric!]!
+}
+
+input AddPageComponentInput {
+  componentId: Int!
+  generateAI: Boolean = false
+  order: Int!
+  pageId: Int!
+  regenerate: Boolean = false
+}
+
+type Admin {
+  email: String!
+  id: String!
+  name: String!
+  phoneNumber: String!
+  role: AdminRole
+  roleId: Int!
+}
+
+type AdminRole {
+  displayName: String!
+  id: Int!
+  isSuperAdmin: Boolean
+  name: String!
+  permissions: [Permission!]
+}
+
+type Analytics {
+  dataStreamName: String!
+  defaultUri: String!
+  displayName: String!
+  id: Int!
+  measurementId: String!
+  parentAccountName: String!
+  projectId: String!
+  propertyName: String!
+}
+
+input AttachDomainInput {
+  domainName: String!
+  projectId: String!
+}
+
+type AttachDomainOutput {
+  success: Boolean!
+}
+
+type AuthResponse {
+  token: String!
+  user: AuthUser!
+}
+
+type AuthUser {
+  email: String!
+  id: String!
+  role: String
+}
+
+type AvailableModels {
+  imageModels: [String!]!
+  textModels: [String!]!
+}
+
+type Blog {
+  body: String!
+  createdAt: DateTime!
+  description: String!
+  id: Int!
+  imagePath: String!
+  slug: String!
+  title: String!
+}
+
+input ChangeComponentLayoutInput {
+  componentId: Int!
+  id: Int!
+  pageId: Int!
+}
+
+type Component {
+  id: Int!
+  image: String!
+  name: String!
+  type: String!
+}
+
+input ComponentInput {
+  componentId: Int!
+  order: Int!
+}
+
+type ContactMessage {
+  createdAt: DateTime!
+  description: String!
+  email: String!
+  id: Int!
+  name: String!
+  projectId: String!
+}
+
+type ContactRequest {
+  assignee: ContactRequestAssignee
+  assigneeId: String
+  createdAt: DateTime!
+  description: String!
+  email: String!
+  id: Int!
+  name: String!
+  phoneNumber: String!
+  status: String!
+  subject: String!
+  updatedAt: DateTime!
+}
+
+type ContactRequestAssignee {
+  id: String!
+  name: String!
+}
+
+input CreateAdminInput {
+  email: String!
+  name: String!
+  phoneNumber: String!
+  roleId: Int!
+}
+
+input CreateAdminRoleInput {
+  displayName: String!
+  isSuperAdmin: Boolean
+  name: String!
+  permissionsIds: [Int!]!
+}
+
+input CreateAnalyticsInput {
+  defaultUri: String!
+  projectId: String!
+}
+
+input CreateBlogInput {
+  body: String!
+  description: String!
+  imagePath: String!
+  title: String!
+}
+
+input CreateContactRequestInput {
+  description: String!
+  email: String!
+  name: String!
+  phoneNumber: String!
+  subject: String!
+}
+
+input CreateDomainRegistrationInput {
+  domainName: String!
+  method: String!
+  years: Int!
+}
+
+type CreateDomainRegistrationOutput {
+  redirectURL: String!
+}
+
+input CreateDonationInput {
+  amount: Float!
+  method: String!
+  type: String!
+}
+
+type CreateDonationOutput {
+  redirectURL: String!
+}
+
+input CreateFreeDomainRegistrationInput {
+  domainName: String!
+  years: Int!
+}
+
+type CreateFreeDomainRegistrationOutput {
+  success: Boolean!
+}
+
+input CreateMediaInput {
+  path: String!
+  projectId: String!
+  title: String!
+  type: String!
+  viewTypes: [String!]!
+}
+
+input CreateMenuInput {
+  label: String!
+  link: String
+  pageId: Int
+  parentId: Int
+  place: String!
+  projectId: String!
+  section: String
+}
+
+input CreateNotificationTemplateInput {
+  description: String!
+  privacy: String!
+  title: String!
+  usersIds: [String!]!
+}
+
+input CreatePageInput {
+  description: String!
+  generateAI: Boolean!
+  projectId: String!
+  sections: [ComponentInput!]!
+  title: String!
+}
+
+input CreatePaletteInput {
+  neutral: String!
+  primary: String!
+  secondary: String!
+  subTitles: String!
+  titles: String!
+}
+
+input CreatePlanInput {
+  description: String!
+  discount: Float
+  extraFeatures: [String!]
+  features: [PlanFeatureLimitationInput!]!
+  name: String!
+  period: Int!
+  periodType: String!
+  price: Float!
+}
+
+input CreatePostInput {
+  body: String!
+  description: String!
+  imagePath: String!
+  projectId: String!
+  title: String!
+}
+
+input CreateProjectInput {
+  audience: ProjectAudienceInput!
+  description: String!
+  design: ProjectDesignInput!
+  generateAI: Boolean!
+  intellectualProperty: IntellectualPropertyInput!
+  keywords: [String!]!
+  mainLanguage: String!
+  media: [ProjectMediaInput!]!
+  name: String!
+  plugins: [String!]!
+  purpose: String!
+  sections: [ComponentInput!]!
+  similarWebsites: [String!]!
+  type: String!
+  websiteLocation: String!
+}
+
+input CreateSubscriptionInput {
+  method: String!
+  planId: Int!
+}
+
+type CreateSubscriptionOutput {
+  redirectURL: String!
+}
+
+input CreateTicketInput {
+  attachmentPath: String
+  description: String!
+  email: String!
+  name: String!
+  phoneNumber: String!
+  priority: String!
+  subject: String!
+}
+
+input CreateUserInput {
+  email: String!
+  gender: String!
+  id: String!
+  imagePath: String
+  name: String!
+  phoneNumber: String!
+}
+
+type DateMetric {
+  date: String!
+  value: Int!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input DeleteMediaInput {
+  id: Int!
+  projectId: String!
+}
+
+input DeleteMenuInput {
+  id: Int!
+  projectId: String!
+}
+
+input DeletePageInput {
+  pageId: Int!
+  projectId: String!
+}
+
+input DeletePaletteInput {
+  id: String!
+}
+
+input DetachDomainInput {
+  projectId: String!
+}
+
+type DetachDomainOutput {
+  success: Boolean!
+}
+
+type DomainPrice {
+  duration: Int!
+  durationType: String!
+  price: Float!
+}
+
+type DomainRegistration {
+  amount: Float!
+  createdAt: DateTime!
+  domainName: String!
+  id: Int!
+  isFree: Boolean!
+  status: String!
+  updatedAt: DateTime!
+  userId: String!
+  years: Int!
+}
+
+type Donation {
+  amount: Float!
+  createdAt: DateTime!
+  id: Int!
+  status: String!
+  type: String!
+  userId: String!
+}
+
+input GetActiveUsersInput {
+  endDate: String!
+  projectId: String!
+  startDate: String!
+}
+
+input IntellectualPropertyInput {
+  about: String
+  bio: String
+  contactEmail: String!
+  contactNumber: String
+  location: String
+  relatedLinks: [String!]
+  type: String!
+}
+
+"""Represents JSON object"""
+scalar JSON
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type Media {
+  id: Int!
+  path: String!
+  projectId: String!
+  title: String!
+  type: String!
+  viewTypes: [String!]!
+}
+
+type Menu {
+  children: [Menu!]
+  id: Int!
+  label: String!
+  link: String
+  pageId: Int
+  pageSlug: String
+  parentId: Int
+  place: String!
+  projectId: String!
+  section: String
+}
+
+type Mutation {
+  addFreeCertificateToDomain(projectId: String!): Boolean!
+  addPageComponent(input: AddPageComponentInput!): PageComponent!
+  adminLogin(adminLoginInput: LoginInput!): AuthResponse!
+  attachDomain(attachDomainInput: AttachDomainInput!): AttachDomainOutput!
+  changePageComponentLayout(input: ChangeComponentLayoutInput!): PageComponent!
+  checkPaymentStatus(transactionId: String!): String!
+  createAdmin(createAdminInput: CreateAdminInput!): Admin!
+  createAdminRole(createAdminRoleInput: CreateAdminRoleInput!): Role!
+  createAnalytics(createAnalyticsInput: CreateAnalyticsInput!): Analytics!
+  createAnalyticsProperty(id: String!): Boolean!
+  createBlog(createBlogInput: CreateBlogInput!): Blog!
+  createContactRequest(createContactRequestInput: CreateContactRequestInput!): ContactRequest!
+  createDomainRegistration(createDomainRegistrationInput: CreateDomainRegistrationInput!): CreateDomainRegistrationOutput!
+  createDonation(createDonationInput: CreateDonationInput!): CreateDonationOutput!
+  createFreeDomainRegistration(createFreeDomainRegistrationInput: CreateFreeDomainRegistrationInput!): CreateFreeDomainRegistrationOutput!
+  createMedia(createMediaInput: CreateMediaInput!): Media!
+  createMenu(createMenuInput: CreateMenuInput!): Menu!
+  createNotificationTemplate(createNotificationTemplateInput: CreateNotificationTemplateInput!): NotificationTemplate!
+  createPage(input: CreatePageInput!): Page!
+  createPalette(input: CreatePaletteInput!): Palettes!
+  createPlan(createPlanInput: CreatePlanInput!): Plan!
+  createPost(createPostInput: CreatePostInput!): Post!
+  createProject(createProjectInput: CreateProjectInput!): Project!
+  createSubscription(createSubscriptionInput: CreateSubscriptionInput!): CreateSubscriptionOutput!
+  createTicket(createTicketInput: CreateTicketInput!): Ticket!
+  createUser(createUserInput: CreateUserInput!): User!
+  deleteAdmin(id: String!): Boolean!
+  deleteAdminRole(id: Int!): Role!
+  deleteMedia(deleteMediaInput: DeleteMediaInput!): Media!
+  deleteMenu(deleteMenuInput: DeleteMenuInput!): Menu!
+  deletePage(input: DeletePageInput!): Boolean!
+  deletePalettes(input: DeletePaletteInput!): Boolean!
+  deletePost(id: Int!): Post!
+  deleteProject(id: String!): Boolean!
+  deleteUser(id: String!): Boolean!
+  detachDomain(detachDomainInput: DetachDomainInput!): DetachDomainOutput!
+  enhanceText(text: String!): String!
+  exportProject(id: String!): Boolean!
+  generateImage(description: String!): String!
+  generatePost(projectId: String!): Post!
+  generateText(text: String!): String!
+  login(loginInput: LoginInput!): AuthResponse!
+  loginWithGoogle(token: String!): AuthResponse!
+  publishProject(id: String!): Boolean!
+  regeneratePage(input: RegeneratePageInput!): Boolean!
+  regenerateText(input: RegenerateTextInput!): String!
+  register(registerInput: RegisterInput!): AuthUser!
+  removeBlog(id: Int!): Blog!
+  removeContactMessage(removeContactMessageInput: RemoveContactMessageInput!): ContactMessage!
+  removeContactRequest(id: Int!): ContactRequest!
+  removeMultipleNotificationTemplate(ids: [Int!]!): Boolean!
+  removeNotificationTemplate(id: Int!): NotificationTemplate!
+  removePageComponent(input: RemovePageComponentInput!): PageComponent!
+  removePlan(id: Int!): Plan!
+  removeTicket(id: Int!): Ticket!
+  requestAdminRecoverPassword(requestAdminRecoverPasswordInput: RequestRecoverPasswordInput!): String!
+  requestRecoverPassword(requestRecoverPasswordInput: RequestRecoverPasswordInput!): String!
+  resendAdminVerificationEmail(resendAdminVerificationEmailInput: ResendVerificationEmailInput!): AuthUser!
+  resendVerificationEmail(resendVerificationEmailInput: ResendVerificationEmailInput!): AuthUser!
+  resetAdminPassword(resetAdminPasswordInput: ResetPasswordInput!): Boolean!
+  resetPassword(resetPasswordInput: ResetPasswordInput!): Boolean!
+  sendMail: String!
+  suggestDomainNames(keyword: String!): [String!]!
+  suggestLogoTexts(keyword: String!): [String!]!
+  swapPageComponents(input: SwapPageComponentsInput!): Boolean!
+  updateAdamWidgetConfig(updateAdamWidgetConfigInput: UpdateAdamWidgetConfigInput!): Boolean!
+  updateAdmin(id: String!, updateAdminInput: UpdateAdminInput!): Admin!
+  updateAdminPassword(updateAdminPasswordInput: UpdateAdminPasswordInput!): Boolean!
+  updateAdminProfile(updateAdminProfileInput: UpdateAdminProfileInput!): Admin!
+  updateAdminRole(updateAdminRoleInput: UpdateAdminRoleInput!): Role!
+  updateBlog(updateBlogInput: UpdateBlogInput!): Blog!
+  updateContactRequest(updateContactRequestInput: UpdateContactRequestInput!): ContactRequest!
+  updateMedia(updateMediaInput: UpdateMediaInput!): Media!
+  updateMenu(updateMenuInput: UpdateMenuInput!): Menu!
+  updatePageComponent(input: UpdatePageComponentInput!): Boolean!
+  updatePalettes(input: UpdatePaletteInput!): Boolean!
+  updatePassword(updatePasswordInput: UpdatePasswordInput!): UpdatePasswordResponse!
+  updatePlan(updatePlanInput: UpdatePlanInput!): Plan!
+  updatePost(updatePostInput: UpdatePostInput!): Post!
+  updatePreferences(updatePreferencesInput: UpdatePreferencesInput!): UpdatePreferencesOutput!
+  updateProfile(updateProfileInput: UpdateProfileInput!): User!
+  updateProject(updateProjectInput: UpdateProjectInput!): Boolean!
+  updateProjectSettings(updateProjectSettingsInput: UpdateProjectSettingsInput!): Boolean!
+  updateTicket(updateTicketInput: UpdateTicketInput!): Ticket!
+  updateUser(id: String!, updateUserInput: UpdateUserInput!): User!
+  verifyAdminEmail(verifyAdminEmailInput: VerifyUserEmailInput!): AuthUser!
+  verifyUserEmail(verifyUserEmailInput: VerifyUserEmailInput!): AuthUser!
+}
+
+type NotificationTemplate {
+  createdAt: DateTime!
+  description: String!
+  id: Int!
+  notificationTemplateUsers: [NotificationTemplateUser!]
+  privacy: String!
+  title: String!
+}
+
+type NotificationTemplateUser {
+  id: Int!
+  templateId: Int!
+  userId: String!
+}
+
+type Page {
+  components: [PageComponent!]
+  description: String!
+  id: Int!
+  projectId: String!
+  slug: String
+  title: String!
+}
+
+type PageComponent {
+  component: Component
+  componentId: Int!
+  data: JSON!
+  elements: [String!]
+  id: Int!
+  order: Int!
+  pageId: Int!
+}
+
+type Palette {
+  neutral: String!
+  primary: String!
+  secondary: String!
+  subTitles: String!
+  titles: String!
+}
+
+input PaletteInput {
+  neutral: String!
+  primary: String!
+  secondary: String!
+  subTitles: String!
+  titles: String!
+}
+
+type Palettes {
+  id: String!
+  neutral: String!
+  primary: String!
+  secondary: String!
+  subTitles: String!
+  titles: String!
+  userId: String
+}
+
+type Payment {
+  cost: Float!
+  createdAt: DateTime!
+  currency: String!
+  domainRegistrationId: Int
+  donationId: Int
+  email: String!
+  firstName: String!
+  id: Int!
+  lastName: String!
+  method: String!
+  paymentReference: String!
+  status: String!
+  subscriptionId: Int
+  transactionId: String
+  type: String!
+  userId: String!
+}
+
+type Permission {
+  id: Int!
+  name: String!
+}
+
+type Plan {
+  createdAt: DateTime!
+  description: String!
+  discount: Float!
+  extraFeatures: [String!]
+  features: [PlanFeatureLimitation!]!
+  id: Int!
+  name: String!
+  period: Int!
+  periodType: String!
+  price: Float!
+  updatedAt: DateTime!
+}
+
+type PlanFeatureLimitation {
+  createdAt: DateTime!
+  description: String!
+  feature: PlanFeatureSchema
+  featureId: Int!
+  id: Int!
+  limitation: JSON
+  planId: Int!
+}
+
+input PlanFeatureLimitationInput {
+  description: String!
+  featureId: Int!
+  limitation: JSON
+}
+
+type PlanFeatureSchema {
+  createdAt: DateTime!
+  id: Int!
+  key: String!
+  limitationSchema: JSON
+  title: String!
+}
+
+type Post {
+  body: String!
+  createdAt: DateTime!
+  description: String!
+  id: Int!
+  imageAlt: String
+  imagePath: String!
+  projectId: String!
+  slug: String
+  title: String!
+}
+
+type Project {
+  audience: ProjectAudience
+  cdnPullZoneId: Int
+  contactMessages: [ContactMessage!]
+  createdAt: DateTime!
+  description: String!
+  domainRegistration: ProjectDomainRegistration
+  id: String!
+  intellectualPropertyInfo: JSON!
+  intellectualPropertyType: String!
+  keywords: [String!]!
+  mainLanguage: String!
+  media: [Media!]
+  name: String!
+  pages: [Page!]
+  plugins: [ProjectPlugin!]
+  posts: [Post!]
+  publicURL: String!
+  purpose: String!
+  settings: ProjectSettings
+  similarWebsites: [String!]!
+  type: String!
+  userId: String!
+  websiteLocation: String!
+}
+
+type ProjectAudience {
+  age: [String!]!
+  countries: [String!]
+  gender: [String!]!
+  id: Int!
+  organizations: [String!]
+  projectId: String!
+}
+
+input ProjectAudienceInput {
+  age: [String!]!
+  countries: [String!]
+  gender: [String!]!
+  organizations: [String!]
+}
+
+input ProjectDesignInput {
+  fontFamily: String!
+  logoType: String!
+  logoValue: String!
+  palette: PaletteInput!
+}
+
+type ProjectDomainRegistration {
+  domainRegistration: DomainRegistration!
+  domainRegistrationId: Int!
+  projectId: String!
+}
+
+type ProjectGeneration {
+  createdAt: DateTime!
+  error: String
+  id: Int!
+  logs: String
+  projectId: String!
+  status: String!
+}
+
+input ProjectMediaInput {
+  path: String!
+  title: String!
+  type: String!
+}
+
+type ProjectPlugin {
+  id: Int!
+  key: String!
+  projectId: String!
+  value: String!
+  variation: String!
+}
+
+type ProjectSettings {
+  fontFamily: String!
+  id: Int!
+  logoType: String!
+  logoValue: String!
+  palette: Palette!
+  projectId: String!
+}
+
+type ProjectTargetType {
+  description: String!
+  imageUrl: String!
+  title: String!
+}
+
+type Query {
+  admin(id: String!): Admin!
+  adminMe: Admin!
+  admins: [Admin!]!
+  blog(id: Int!): Blog!
+  blogs: [Blog!]!
+  checkDomainAvailability(domainName: String!): Boolean!
+  component(id: Int!): Component!
+  components(type: String): [Component!]!
+  contactMessages(projectId: String!): [ContactMessage!]!
+  contactRequest(id: Int!): ContactRequest!
+  contactRequests: [ContactRequest!]!
+  donation(id: Int!): Donation!
+  donations: [Donation!]!
+  getActiveUsersByContinent(getActiveUsersInput: GetActiveUsersInput!): ActiveUsersOutput!
+  getActiveUsersByCountryInLast30Mins(projectId: String!): ActiveUsersOutput!
+  getActiveUsersByHour(getActiveUsersInput: GetActiveUsersInput!): ActiveUsersOutput!
+  getActiveUsersByPage(getActiveUsersInput: GetActiveUsersInput!): ActiveUsersOutput!
+  getAvailableAIModels: AvailableModels!
+  getBlogBySlug(slug: String!): Blog!
+  getDomainPricing(domainName: String!): [DomainPrice!]!
+  getDomainRegistrations: [DomainRegistration!]!
+  getMyDonations: [Donation!]!
+  getMySubscription: Subscription!
+  getProjectAnalyticsProperty(projectId: String!): Analytics!
+  getProjectMedia(projectId: String!): [Media!]!
+  getProjectMenus(projectId: String!): [Menu!]!
+  getReportByDate(projectId: String!): ReportByDateOutput!
+  getUnattachedDomains: [String!]!
+  getUserUsage: UserUsageOutput!
+  me: User!
+  media(id: Int!): Media!
+  menu(id: Int!): Menu!
+  page(id: Int!): Page!
+  palette(id: String!): Palettes!
+  palettes: [Palettes!]!
+  plan(id: Int!): Plan!
+  plans: [Plan!]!
+  post(id: Int!): Post!
+  posts: [Post!]!
+  project(id: String!): Project!
+  projectGeneration(projectId: String!): ProjectGeneration!
+  projectTargetTypes: [ProjectTargetType!]!
+  projects: [Project!]!
+  subscription(id: Int!): Subscription!
+  ticket(id: Int!): Ticket!
+  tickets: [Ticket!]!
+  totalRevenue(totalRevenueInput: TotalRevenueInput!): TotalRevenueOutput!
+  user(id: String!): User!
+  users: [User!]!
+}
+
+input RegeneratePageInput {
+  pageId: Int!
+  projectId: String!
+}
+
+input RegenerateTextInput {
+  itemType: String!
+  projectId: String!
+  sectionType: String!
+}
+
+input RegisterInput {
+  email: String!
+  gender: String!
+  imagePath: String
+  name: String!
+  password: String!
+  phoneNumber: String!
+}
+
+input RemoveContactMessageInput {
+  id: Int!
+  projectId: String!
+}
+
+input RemovePageComponentInput {
+  componentId: Int!
+  pageId: Int!
+}
+
+type ReportByDateOutput {
+  activeUsers: [DateMetric!]!
+  conversions: [DateMetric!]!
+  eventCount: [DateMetric!]!
+  newUsers: [DateMetric!]!
+}
+
+input RequestRecoverPasswordInput {
+  email: String!
+}
+
+input ResendVerificationEmailInput {
+  email: String!
+}
+
+input ResetPasswordInput {
+  code: String!
+  email: String!
+  password: String!
+  token: String!
+}
+
+type Role {
+  displayName: String!
+  id: Int!
+  isSuperAdmin: Boolean
+  name: String!
+}
+
+type Subscription {
+  cost: Float!
+  createdAt: DateTime!
+  expirationDays: Float
+  expireAt: DateTime!
+  id: Int!
+  imageGenerations: Int!
+  isExpired: Boolean
+  payment: Payment
+  plan: Plan
+  planId: Int!
+  status: String!
+  textGenerations: Int!
+  userId: String!
+}
+
+input SwapPageComponentsInput {
+  componentsIds: [Int!]!
+  pageId: Int!
+}
+
+type Ticket {
+  attachmentPath: String
+  createdAt: DateTime!
+  description: String!
+  email: String!
+  id: Int!
+  name: String!
+  phoneNumber: String!
+  priority: String!
+  status: String!
+  subject: String!
+  updatedAt: DateTime!
+}
+
+input TotalRevenueInput {
+  period: Float!
+  periodType: String!
+}
+
+type TotalRevenueItem {
+  date: DateTime!
+  value: Float!
+}
+
+type TotalRevenueOutput {
+  items: [TotalRevenueItem!]!
+}
+
+input UpdateAdamWidgetConfigInput {
+  fontSize: Int!
+  primaryColor: String!
+  projectId: String!
+  secondaryColor: String!
+}
+
+input UpdateAdminInput {
+  name: String
+  phoneNumber: String
+  roleId: Int
+  verified: Boolean
+}
+
+input UpdateAdminPasswordInput {
+  confirmNewPassword: String!
+  newPassword: String!
+  oldPassword: String!
+}
+
+input UpdateAdminProfileInput {
+  name: String
+  phoneNumber: String
+}
+
+input UpdateAdminRoleInput {
+  displayName: String!
+  id: Int!
+  isSuperAdmin: Boolean
+  name: String!
+  permissionsIds: [Int!]!
+}
+
+input UpdateBlogInput {
+  body: String
+  description: String
+  id: Int!
+  imagePath: String
+  title: String
+}
+
+input UpdateContactRequestInput {
+  assigneeId: String
+  id: Int!
+  status: String
+}
+
+input UpdateMediaInput {
+  id: Int!
+  path: String
+  projectId: String
+  title: String
+  type: String
+  viewTypes: [String!]
+}
+
+input UpdateMenuInput {
+  id: Int!
+  label: String
+  link: String
+  pageId: Int
+  parentId: Int
+  place: String
+  projectId: String
+  section: String
+}
+
+input UpdatePageComponentInput {
+  data: JSON!
+  id: Int!
+  pageId: Int!
+}
+
+input UpdatePaletteInput {
+  id: String!
+  neutral: String
+  primary: String
+  secondary: String
+  subTitles: String
+  titles: String
+}
+
+input UpdatePasswordInput {
+  confirmNewPassword: String!
+  newPassword: String!
+  oldPassword: String!
+}
+
+type UpdatePasswordResponse {
+  success: Boolean!
+}
+
+input UpdatePlanInput {
+  description: String
+  discount: Float
+  extraFeatures: [String!]
+  features: [PlanFeatureLimitationInput!]
+  id: Int!
+  name: String
+  period: Int
+  periodType: String
+  price: Float
+}
+
+input UpdatePostInput {
+  body: String
+  description: String
+  id: Int!
+  imagePath: String
+  projectId: String!
+  title: String
+}
+
+input UpdatePreferencesInput {
+  imageModel: String!
+  textModel: String!
+}
+
+type UpdatePreferencesOutput {
+  success: Boolean!
+}
+
+input UpdateProfileInput {
+  gender: String
+  imagePath: String
+  name: String
+  phoneNumber: String
+}
+
+input UpdateProjectDesignInput {
+  fontFamily: String!
+  logoType: String!
+  logoValue: String!
+  palette: PaletteInput!
+}
+
+input UpdateProjectInput {
+  audience: ProjectAudienceInput
+  description: String
+  design: UpdateProjectDesignInput
+  generateAI: Boolean
+  id: String!
+  intellectualProperty: IntellectualPropertyInput
+  keywords: [String!]
+  mainLanguage: String
+  media: [ProjectMediaInput!]
+  name: String
+  plugins: [String!]
+  purpose: String
+  sections: [ComponentInput!]
+  similarWebsites: [String!]
+  type: String
+  volume: String
+  websiteLocation: String
+}
+
+input UpdateProjectSettingsInput {
+  fontFamily: String!
+  logoType: String!
+  logoValue: String!
+  pageDescription: String!
+  pageId: Int!
+  pageTitle: String!
+  palette: PaletteInput!
+  projectId: String!
+}
+
+input UpdateTicketInput {
+  id: Int!
+  status: String!
+}
+
+input UpdateUserInput {
+  gender: String
+  imagePath: String
+  name: String
+  phoneNumber: String
+  verified: Boolean
+}
+
+type User {
+  createdAt: DateTime!
+  email: String!
+  gender: String!
+  id: String!
+  imagePath: String
+  metadata: JSON!
+  name: String!
+  phoneNumber: String!
+  preferences: UserPreferences
+  verified: Boolean!
+}
+
+type UserPreferences {
+  imageModel: String!
+  textModel: String!
+  userId: String!
+}
+
+type UserUsageOutput {
+  hasOneProjectFreeTrial: Boolean!
+  projectsCount: Int!
+}
+
+input VerifyUserEmailInput {
+  token: String!
+}
